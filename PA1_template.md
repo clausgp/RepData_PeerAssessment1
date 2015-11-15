@@ -46,7 +46,7 @@ median(act.date$steps)
 ## What is the average daily activity pattern?
 
 ```r
-# sum by interval and make the time series plot
+# aggregate mean steps by interval and make the time series plot
 act.interval <- aggregate(steps~interval, data=act, FUN=mean)
 plot(act.interval$interval, act.interval$steps, type="l", xlab="interval", ylab="steps", main="daily activity")
 ```
@@ -75,7 +75,9 @@ sum(is.na(act))
 ```
 
 ```r
-# strategy to assign values to NA. A good assumption to use is that the number of steps follows a daily pattern that is even across all the days, so the average of recorded values for the same interval can be assigned to the NAs
+# strategy to assign values to NA. A good assumption to use is that the number of steps follows a daily pattern
+# that is close to even across all the days, so the average of recorded values for the same interval can be
+# assigned to the NAs
 act2 <- act
 act2$steps <- mapply(function(steps, interval) 
                         if (is.na(steps)) 

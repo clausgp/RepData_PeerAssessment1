@@ -232,7 +232,7 @@ mean(act.date$steps)
 
 <h2>What is the average daily activity pattern?</h2>
 
-<pre><code class="r"># sum by interval and make the time series plot
+<pre><code class="r"># aggregate mean steps by interval and make the time series plot
 act.interval &lt;- aggregate(steps~interval, data=act, FUN=mean)
 plot(act.interval$interval, act.interval$steps, type=&quot;l&quot;, xlab=&quot;interval&quot;, ylab=&quot;steps&quot;, main=&quot;daily activity&quot;)
 </code></pre>
@@ -255,7 +255,9 @@ sum(is.na(act))
 <pre><code>## [1] 2304
 </code></pre>
 
-<pre><code class="r"># strategy to assign values to NA. A good assumption to use is that the number of steps follows a daily pattern that is even across all the days, so the average of recorded values for the same interval can be assigned to the NAs
+<pre><code class="r"># strategy to assign values to NA. A good assumption to use is that the number of steps follows a daily pattern
+# that is close to even across all the days, so the average of recorded values for the same interval can be
+# assigned to the NAs
 act2 &lt;- act
 act2$steps &lt;- mapply(function(steps, interval) 
                         if (is.na(steps)) 
